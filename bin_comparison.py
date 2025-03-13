@@ -43,22 +43,23 @@ if not ocf_folder or not transcode_folder:
 ocf_clips = ocf_folder.GetClipList()
 transcode_clips = transcode_folder.GetClipList()
 
-print(ocf_clips, transcode_clips)
-
 ocf_tl = media_pool.CreateTimelineFromClips("OCF_Clips", ocf_clips)
 transcode_tl = media_pool.CreateTimelineFromClips("Transcode_Clips", transcode_clips)
 
 ocf_frames = ocf_tl.GetEndFrame()
 transcode_frames = transcode_tl.GetEndFrame()
 
-if ocf_frames == transcode_frames:
+if ocf_frames == transcode_frames and len(ocf_clips) == len(transcode_clips):
     print(bcolors.OKGREEN)
 
 else:
     print(bcolors.FAIL)
 
-print(f"OCF Frames: {ocf_frames}")
-print(f"Transcode Frames: {transcode_frames}")
+print(f"OCF clips: {len(ocf_clips)}")
+print(f"Transcode clips: {len(transcode_clips)}")
+
+print(f"OCF frames: {ocf_frames}")
+print(f"Transcode frames: {transcode_frames}")
 print(bcolors.ENDC)
 
 media_pool.DeleteTimelines([ocf_tl, transcode_tl])
